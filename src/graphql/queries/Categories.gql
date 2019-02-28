@@ -1,0 +1,9 @@
+query {
+  categories {
+    id
+    title
+    books {
+      title
+    }
+  }
+}

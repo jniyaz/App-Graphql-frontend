@@ -1,14 +1,14 @@
 <template>
   <div class="home">
      <!-- Apollo Query -->
-    <ApolloQuery :query="require('@/graphql/users.gql')">
+    <ApolloQuery :query="require('@/graphql/queries/Categories.gql')">
       <!-- The result will automatically updated -->
       <template slot-scope="{ result: { data, loading } }">
         <!-- Some content -->
         <div v-if="loading">Loading...</div>
         <ul v-else>
-          <li v-for="user of data.users" class="user">
-            {{ user.name }}
+          <li v-for="category of data.categories" :key="category.id" class="user">
+            {{ category.title }}
           </li>
         </ul>
       </template>
@@ -18,7 +18,6 @@
 
 <script>
 // @ is an alias to /src
-import gql from 'graphql-tag'
 
 export default {
   name: 'home',
@@ -28,15 +27,6 @@ export default {
     return {
         categories: []
     }
-  },
-  apollo: {
-    // Simple query that will update the 'hello' vue property
-    categories: gql`query {
-      categories {
-        id,
-        title
-      }
-    }`,
-  },
+  }
 }
 </script>
