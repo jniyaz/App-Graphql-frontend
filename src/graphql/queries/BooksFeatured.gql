@@ -1,8 +1,8 @@
 query($featured: Boolean!) {
-    booksByFeatured(featured: $featured) {
-     id
-     title
-     author_name
-     image
-    }
+  booksByFeatured(featured: $featured) {
+    id
+    title
+    author_name
+    image
+  }
 }

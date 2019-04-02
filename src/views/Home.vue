@@ -6,7 +6,7 @@
       <template slot-scope="{ result: { data, loading }, isLoading }">
         <!-- Some content -->
         <div v-if="isLoading">Loading...</div>
-        <div v-else>
+        <div class="mb20" v-else>
           <a href="#" @click.prevent="selectCategory('all')" class="link-margin">All Categories</a>
           <a href="#" @click.prevent="selectCategory('featured')" class="link-margin">Featured Categories</a>
           <a href="#"
@@ -14,7 +14,7 @@
             :key="category.id"
             @click.prevent="selectCategory(category.id)"
             class="link-margin">
-            {{ category.id }}. {{ category.title }}
+            {{ category.title }}
           </a>
         </div>
       </template>
@@ -26,7 +26,9 @@
         <div v-if="isLoading">Loading...</div>
         <div v-else>
           <div v-for="book of data.books" :key="book.id" class="user">
-            {{ book.id }}. {{ book.title }}
+            <router-link :to="`books/${book.id}`">{{ book.id }}. {{ book.title }}</router-link>
+            <div><small>{{ book.author_name }}</small></div>
+            <img :src="book.image" alt="cover-image">
           </div>
         </div>
       </template>
@@ -39,7 +41,9 @@
           <div v-if="isLoading">Loading...</div>
           <div v-else>
             <div v-for="book of data.booksByFeatured" :key="book.id" class="user">
-              {{ book.id }}. {{ book.title }}
+              <router-link :to="`books/${book.id}`">{{ book.id }}. {{ book.title }}</router-link>
+              <div><small>{{ book.author_name }}</small></div>
+              <img :src="book.image" alt="cover-image">
             </div>
           </div>
         </template>
@@ -47,13 +51,14 @@
     </div>
 
     <div v-else>
-    <ApolloQuery :query="categoryQuery" :variables="{ id: selectedCategory }">
+    <ApolloQuery :query="query" :variables="{ id: selectedCategory }">
       <template slot-scope="{ result: { data, loading }, isLoading }">
-        <div><br></div>
         <div v-if="isLoading">Loading...</div>
         <div v-else>
           <div v-for="book of data.category.books" :key="book.id" class="user">
-            {{ book.id }}. {{ book.title }}
+            <router-link :to="`books/${book.id}`">{{ book.id }}. {{ book.title }}</router-link>
+            <div><small>{{ book.author_name }}</small></div>
+            <img :src="book.image" alt="cover-image">
           </div>
         </div>
       </template>
@@ -66,8 +71,8 @@
 <script>
 // @ is an alias to /src
 import categoryQuery from '@/graphql/queries/Category.gql'
-import booksQuery from '@/graphql/queries/Books.gql'
 import categoriesQuery from '@/graphql/queries/Categories.gql'
+import booksQuery from '@/graphql/queries/Books.gql'
 import booksFeaturedQuery from '@/graphql/queries/BooksFeatured.gql'
 
 export default {
@@ -78,23 +83,23 @@ export default {
     return {
         categoryQuery,
         categoriesQuery,
-        booksFeaturedQuery,
         booksQuery,
-        categories: [],
+        booksFeaturedQuery,
         selectedCategory: 'all',
         query: booksQuery,
-
+        categories: []
     }
   },
   methods: {
-    selectCategory (category) {
+    selectCategory(category) {
       if (category === 'all') {
         this.query = booksQuery
       } else if (category === 'featured') {
         this.query = booksFeaturedQuery
       } else {
-        this.selectedCategory = category
+        this.query = categoryQuery
       }
+      this.selectedCategory = category
     }
   }
 }
@@ -103,5 +108,8 @@ export default {
 <style>
   .link-margin{
     margin-right: 24px;
+  }
+  .mb20{
+    margin-bottom: 20px;
   }
 </style>
