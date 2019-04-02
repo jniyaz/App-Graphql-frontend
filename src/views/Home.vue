@@ -1,5 +1,8 @@
 <template>
   <div class="home">
+    <div class="mb20">
+      <router-link to="books/add" class="btn-add">Add A Book</router-link>
+    </div>
      <!-- Apollo Query -->
     <ApolloQuery :query="categoriesQuery">
       <!-- The result will automatically updated -->
@@ -111,5 +114,10 @@ export default {
   }
   .mb20{
     margin-bottom: 20px;
+  }
+  .btn-add{
+    padding: 5px;
+    background: #ccc;
+    text-decoration: none;
   }
 </style>

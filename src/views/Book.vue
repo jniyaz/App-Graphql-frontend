@@ -10,6 +10,10 @@
             <div>
               {{ data.book.description }}
             </div>
+            <div>
+              <router-link :to="`/books/${data.book.id}/edit`">Edit</router-link> -
+              <a href="#">Delete</a>
+            </div>
           </div>
         </div>
       </template>
