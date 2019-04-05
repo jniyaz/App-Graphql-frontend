@@ -12,7 +12,7 @@
             </div>
             <div>
               <router-link :to="`/books/${data.book.id}/edit`">Edit</router-link> -
-              <a href="#">Delete</a>
+              <a href="#" @click.prevent="deleteBook">Delete</a>
             </div>
           </div>
         </div>
@@ -22,7 +22,20 @@
 </template>
 
 <script>
+  import deleteBook from '@/graphql/mutations/DeleteBook.gql'
   export default {
-
+    methods: {
+      deleteBook () {
+        this.$apollo.mutate({
+          mutation: deleteBook,
+          variables: {
+            id: this.$route.params.id
+          }
+        }).then(data => {
+          console.log(data)
+          this.$router.push('/')
+        })
+      }
+    }
   }
 </script>

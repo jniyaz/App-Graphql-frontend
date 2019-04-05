@@ -1,8 +1,28 @@
 <template>
   <div class="home">
+
+    <div class="hero bg-grey-light mb-24">
+      <div class="container flex justify-between p-10">
+        <div class="mt-10">
+          <h1 class="w-3/4 mb-4">Book Recommendations</h1>
+          <p class="leading-normal w-3/4 mb-6">
+            Built with Laravel + Vue.js + Tailwind CSS
+          </p>
+          <div class="flex items-center">
+            <a href="#" class="bg-purple-dark text-white rounded px-4 py-4 mr-4 hover:bg-purple">View Books</a>
+            <a href="#" class="border border-purple-dark border-solid text-purple-dark rounded px-4 py-4 mr-4 hover:bg-purple hover:text-white">EBooks</a>
+          </div>
+        </div>
+        <div class="pl-5">
+          <img width="180px" src="https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Google_Play_Books_icon_-_vector.svg/1200px-Google_Play_Books_icon_-_vector.svg.png" alt="">
+        </div>
+      </div>
+    </div>
+
     <div class="mb20">
       <router-link to="books/add" class="btn-add">Add A Book</router-link>
     </div>
+
      <!-- Apollo Query -->
     <ApolloQuery :query="categoriesQuery">
       <!-- The result will automatically updated -->
@@ -108,16 +128,4 @@ export default {
 }
 </script>
 
-<style>
-  .link-margin{
-    margin-right: 24px;
-  }
-  .mb20{
-    margin-bottom: 20px;
-  }
-  .btn-add{
-    padding: 5px;
-    background: #ccc;
-    text-decoration: none;
-  }
-</style>
+<style src="@/assets/main.css">

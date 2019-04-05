@@ -4,6 +4,7 @@ query($id: ID!) {
     title
     author_name
     image
+    link
     description
     featured
     categories {

@@ -33,7 +33,7 @@
           <input v-model="image" id="image" name="image" placeholder="Image Path" type="text" tabindex="3" required>
         </fieldset>
         <fieldset>
-          <input v-model="link" id="link" name="link" placeholder="Website Link" type="url" tabindex="4" required>
+          <input v-model="link" id="link" name="link" placeholder="Website Link" type="text" tabindex="4" required>
         </fieldset>
         <fieldset>
           <textarea v-model="description" id="description" name="description" placeholder="Description" tabindex="5" required></textarea>
@@ -51,6 +51,7 @@
 
 <script>
     import updateBook from '@/graphql/mutations/updateBook.gql'
+    import book from '@/graphql/queries/Book.gql'
 
     export default {
         data () {
@@ -61,8 +62,30 @@
                 image: '',
                 link: '',
                 description: '',
-                featured: ''
+                featured: '',
+                book:  null,
             }
+        },
+        // Apollo-specific options
+        apollo: {
+          book: {
+            query: book,
+            variables () {
+                if(this.$route && this.$route.params) {
+                    return {
+                        id: this.$route.params.id
+                    }
+                }
+            },
+            result ({ data, loading, networkStatus }) {
+                this.title = data.book.title
+                this.author_name = data.book.author_name
+                this.image = data.book.image
+                this.link = data.book.link
+                this.description = data.book.description
+                this.featured = data.book.featured
+            }
+          },
         },
         methods: {
             editBook() {
@@ -74,7 +97,7 @@
                   mutation: updateBook,
                   // Parameters
                   variables: {
-                    id: this.id,
+                    id: this.$route.params.id,
                     title: this.title,
                     author_name: this.author_name,
                     image: this.image,
@@ -83,8 +106,7 @@
                     featured: this.featured
                   },
                 }).then((data) => {
-                  console.log(data)
-                  this.$router.push('/books/' + this.id)
+                  this.$router.push('/books/' + this.$route.params.id)
                 }).catch((error) => {
                   console.error(error)
                   this.newTag = newTag
