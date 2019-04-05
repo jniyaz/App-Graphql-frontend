@@ -1,18 +1,25 @@
 <template>
-  <div class="about">
+  <div class="book container">
     <ApolloQuery :query="require('@/graphql/queries/Book.gql')" :variables="{ id: $route.params.id }">
       <template slot-scope="{ result: { data, loading }, isLoading }">
-        <div v-if="isLoading">Loading...</div>
+        <load-spin v-if="isLoading" :loading="isLoading"></load-spin>
         <div v-else>
-          <div class="user">
-            <img :src="data.book.image" alt="cover-image">
-            <div><small>{{ data.book.author_name }}</small></div>
-            <div>
-              {{ data.book.description }}
+          <div class="flex mt-10 fex-col lg:flex-row">
+            <div class="mt-2">
+              <img :src="data.book.image" alt="cover-image">
             </div>
-            <div>
-              <router-link :to="`/books/${data.book.id}/edit`">Edit</router-link> -
-              <a href="#" @click.prevent="deleteBook">Delete</a>
+            <div class="w-full lg:w-3/2 ml-4 lg:ml-10">
+              <div class="text-4xl font-bold mb-3">
+                <small>{{ data.book.title }}</small>
+              </div>
+              <div class="text-xl text-grey-darkest mb-5">
+                {{ data.book.description }}
+              </div>
+              <div class="my-12"><a target="_blank" :href="data.book.link" class="border border-purble-dark border-solid rounded text-purple p-4 hover:bg-purple hover:text-white">View Link</a></div>
+               <div>
+                <router-link :to="`/books/${data.book.id}/edit`">Edit</router-link> &middot;
+                <a href="#" @click.prevent="deleteBook">Delete</a>
+              </div>
             </div>
           </div>
         </div>
@@ -23,7 +30,12 @@
 
 <script>
   import deleteBook from '@/graphql/mutations/DeleteBook.gql'
+  import loadSpin from '@/components/Loader.vue'
+
   export default {
+    components: {
+      loadSpin
+    },
     methods: {
       deleteBook () {
         this.$apollo.mutate({
