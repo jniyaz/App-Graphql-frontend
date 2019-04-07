@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-
     <div class="hero bg-grey-light mb-10">
       <div class="container flex flex-col lg:flex-row lg:justify-between p-10">
         <div class="mt-10">
@@ -20,7 +19,7 @@
     </div> <!-- end hero -->
 
     <div class="container">
-      <div class="flex flex-wrap -mx-4">
+      <div class="flex flex-wrap mx-2">
         <!-- Sidebar -->
         <div class="w-full lg:w-1/4 px-4 mb-8">
           <div class="px-4 mb-8">

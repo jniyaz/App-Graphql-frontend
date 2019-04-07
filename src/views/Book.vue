@@ -4,7 +4,7 @@
       <template slot-scope="{ result: { data, loading }, isLoading }">
         <load-spin v-if="isLoading" :loading="isLoading"></load-spin>
         <div v-else>
-          <div class="flex mt-10 fex-col lg:flex-row">
+          <div class="flex mt-10 px-10 fex-col lg:flex-row">
             <div class="mt-2">
               <img :src="data.book.image" alt="cover-image">
             </div>

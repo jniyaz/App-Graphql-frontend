@@ -1,6 +1,6 @@
 <template>
   <div class="EditBook container">
-    <div class="mt-20">
+    <div class="mt-10 px-10">
         <form id="contact" action="" class="w-full max-w-md" method="post" @submit.prevent="editBook">
           <div class="flex flex-wrap -mx-3 mb-6">
             <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -22,7 +22,6 @@
                 Image Path
               </label>
               <input v-model="image" id="image" name="image" placeholder="Image Path" type="text" tabindex="3" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-grey" required>
-              <p class="text-grey-dark text-xs italic">Make it as long and as crazy as you'd like</p>
             </div>
           </div>
           <div class="flex flex-wrap -mx-3 mb-6">
@@ -31,7 +30,14 @@
                 Web Link
               </label>
               <input v-model="link" id="link" name="link" placeholder="Image Path" type="text" tabindex="4" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-grey" required>
-              <p class="text-grey-dark text-xs italic">Make it as long and as crazy as you'd like</p>
+            </div>
+          </div>
+          <div class="flex flex-wrap -mx-3 mb-2">
+            <div class="w-full px-3">
+              <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-state">
+                Description
+              </label>
+              <textarea v-model="description" name="description" id="description" tabindex="5" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-grey" rows="5"></textarea>
             </div>
           </div>
           <div class="flex flex-wrap -mx-3 mb-2">
@@ -68,6 +74,11 @@
               <span class="text-sm">
                 Set Featured
               </span>
+            </div>
+            <div class="w-full md:w-1/2 px-3 py-5 mb-10 md:mb-0">
+                <button type="submit" class="bg-blue hover:bg-blue-dark text-white font-bold py-2 px-4 rounded-full">
+                    Submit
+                </button>
             </div>
           </div>
         </form>

@@ -1,9 +1,9 @@
 <template>
   <div id="app" class="font-sans antialiased text-black">
     <div id="nav" class="bg-purple-dark">
-      <div class="container flex items-center justify-between p-4">
+      <div class="container flex items-center justify-between px-10 py-4">
         <div>
-          <a href="/"><img src="https://www.jocom.my/images/logo-jocom.png" alt="logo"></a>
+          <h3><a class="text-white" href="/">Books GraphQL</a></h3>
         </div>
         <div>
           <router-link to="/" class="text-white hover:text-grey-light">Home</router-link>
